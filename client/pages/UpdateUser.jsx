@@ -16,7 +16,7 @@ const UpdateUser = () => {
 
   const [formData, setFormData] = useState({ ...user });
 
-  // Converting Image URL to file Blob
+  // Converting Image URL to file Blob and File object to render the image in preview
   useEffect(() => {
     if (user.profilePic) {
       const fetchImage = async () => {

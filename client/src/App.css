@@ -8,6 +8,10 @@ body {
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
 }
 
+a {
+  text-decoration: none;
+}
+
 main {
   min-height: 100dvh;
   max-width: 1400px;
@@ -127,6 +131,17 @@ textarea {
   border-radius: 4px;
 }
 
+.danger-btn {
+  display: block;
+  background-color: #ea4335;
+  padding: 8px 12px;
+  border: 1px solid #ea4335;
+  color: white;
+  font-size: 0.9rem;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
 .react-switch-handle {
   height: 20px !important;
   width: 20px !important;
@@ -142,16 +157,25 @@ textarea {
   border-radius: 5px;
 }
 
-#search {
-  margin-top: 10px;
+.search-container {
+  display: flex;
+  align-items: center;
+  gap: 10px;
 }
 
-tbody .active {
+.select-sort {
+  height: 40px;
+  padding: 5px 10px;
+  border-radius: 5px;
+  outline: none;
+}
+
+.active {
   color: #009879;
   font-weight: 700;
 }
 
-tbody .inactive {
+.inactive {
   color: #ea4335;
   font-weight: 700;
 }
@@ -235,4 +259,170 @@ tbody .inactive {
   border-radius: 5px;
   height: 50px;
   object-fit: cover;
+}
+
+/* Package Card Styles */
+
+.packages-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 20px;
+  padding: 1rem;
+  /* background-color: #f4f4f4; */
+  height: 100%;
+  width: 100%;
+}
+
+/* Styling for the package card */
+.package-card {
+  background-color: #ffffff;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+  max-width: 300px;
+  padding: 20px;
+  margin: 10px;
+  text-align: center;
+  font-family: Arial, sans-serif;
+  transition: transform 0.3s ease;
+  position: relative;
+}
+
+.package-card:hover {
+  transform: translateY(-5px);
+}
+
+.package-title {
+  font-size: 1.5em;
+  color: #333333;
+  margin-bottom: 10px;
+}
+
+.package-description {
+  font-size: 1em;
+  color: #666666;
+  margin-bottom: 15px;
+}
+
+.package-price {
+  font-size: 1.2em;
+  color: #009879;
+  font-weight: bold;
+  margin: 10px 0;
+}
+
+.package-dates {
+  font-size: 0.9em;
+  color: #555555;
+  margin-bottom: 20px;
+  display: flex;
+  justify-content: space-around;
+}
+
+.package-dates span {
+  display: block;
+}
+
+.package-card .btn-container {
+  display: flex;
+  justify-content: space-between;
+}
+
+.buy-button {
+  background-color: #007bff;
+  color: #ffffff;
+  border: none;
+  border-radius: 5px;
+  padding: 10px 20px;
+  font-size: 0.9em;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.buy-button:hover {
+  background-color: #0056b3;
+}
+
+/* auth styling */
+
+.auth-form-container {
+  padding: 1rem;
+  flex-direction: column;
+}
+
+/* Packages details styling */
+
+.package-details-container {
+  background-color: #dddddd;
+  padding: 1rem;
+  margin: 1rem;
+  border-radius: 5px;
+}
+
+.create-package-form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.pencil-icon {
+  position: absolute;
+  right: 10px;
+  top: 10px;
+  cursor: pointer;
+}
+
+/* Modal Styling */
+
+.modal-background {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(13, 13, 13, 0.58);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.modal-container {
+  background: white;
+  border-radius: 5px;
+  width: 500px;
+  max-width: 90%;
+  max-height: 80%;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #009879;
+  padding: 0.8rem 2rem;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+}
+
+.modal-header h1 {
+  color: white;
+  font-size: 1.3rem;
+  font-weight: 600;
+}
+
+.modal-content {
+  padding: 1.5rem 2.5rem;
+  overflow-y: auto;
+  flex-grow: 1;
+}
+
+.modal-footer {
+  display: flex;
+  gap: 10px;
+  padding-inline: 2rem;
+  margin-block: 20px;
 }

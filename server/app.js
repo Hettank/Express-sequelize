@@ -3,6 +3,8 @@ import { connectDB } from "./config/db.js"
 import router from "./routes/index.js"
 import cors from "cors"
 
+import "./associations.js"
+
 const app = express()
 const PORT = 3000
 

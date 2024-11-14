@@ -2,7 +2,7 @@ import { Op } from "sequelize";
 import User from "../model/user.model.js";
 
 const userServices = {
-    getUsers: async (search, page, limit, active, inactive) => {
+    getUsers: async (search, page, limit, active, inactive, order) => {
         try {
             const conditions = {
                 [Op.or]: [
@@ -23,7 +23,8 @@ const userServices = {
             const fetchedUsers = await User.findAndCountAll({
                 limit: limit,
                 offset: offset,
-                where: conditions
+                where: conditions,
+                order: [['createdAt', order]]
             })
 
             return fetchedUsers
@@ -40,7 +41,6 @@ const userServices = {
 
             return user
         } catch (error) {
-
             throw new Error(error)
         }
     },

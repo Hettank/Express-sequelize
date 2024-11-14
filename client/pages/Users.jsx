@@ -18,13 +18,16 @@ const Users = () => {
   const [active, setActive] = useState(false);
   const [inactive, setInactive] = useState(false);
 
+  const [sortOrder, setSortOrder] = useState("DESC");
+
   // fetch users with pagination and search
   const fetchUsers = async (
     searchQuery = "",
     page = 1,
     limit = 10,
     activeStatus,
-    inactiveStatus
+    inactiveStatus,
+    sortOrder
   ) => {
     try {
       const response = await axios.get(`${API}/api/users`, {
@@ -34,6 +37,7 @@ const Users = () => {
           limit,
           active: activeStatus,
           inactive: inactiveStatus,
+          order: sortOrder,
         },
       });
 
@@ -45,8 +49,8 @@ const Users = () => {
   };
 
   useEffect(() => {
-    fetchUsers(search, currentPage, pageSize, active, inactive);
-  }, [currentPage, pageSize, search, active, inactive]);
+    fetchUsers(search, currentPage, pageSize, active, inactive, sortOrder);
+  }, [currentPage, pageSize, search, active, inactive, sortOrder]);
 
   const handleDelete = async (userId) => {
     try {
@@ -83,7 +87,16 @@ const Users = () => {
     setCurrentPage(1);
   };
 
-  console.log("users", users);
+  const handleSelectChange = (e) => {
+    setSortOrder(e.target.value);
+  };
+
+  const user = JSON.parse(localStorage.getItem("userDetails"));
+
+  const logout = () => {
+    localStorage.clear();
+    window.location.reload();
+  };
 
   return (
     <div className="user-container">
@@ -102,6 +115,30 @@ const Users = () => {
           value={search}
           onChange={handleSearch}
         />
+        <select
+          name="sortOrder"
+          id="sortOrder"
+          onChange={handleSelectChange}
+          value={sortOrder}
+          className="select-sort"
+        >
+          <option value="" disabled>
+            Select Option
+          </option>
+          <option value="DESC">Newest</option>
+          <option value="ASC">Oldest</option>
+        </select>
+        <Link className="btn default-btn" to="/buy-packages">
+          Buy Package
+        </Link>
+        <Link className="btn default-btn" to="/login">
+          Login
+        </Link>
+        {user && (
+          <Link className="btn default-btn" onClick={logout}>
+            Logout
+          </Link>
+        )}
       </div>
       <div className="filters-container">
         <h4>Apply Filters</h4>
@@ -127,7 +164,7 @@ const Users = () => {
       <table className="content-table">
         <thead>
           <tr>
-            <th>Thumbnail</th>
+            <th>Profile</th>
             <th>First Name</th>
             <th>Last Name</th>
             <th>Email</th>
@@ -174,7 +211,7 @@ const Users = () => {
             ))
           ) : (
             <tr>
-              <td colSpan="6" style={{ textAlign: "center" }}>
+              <td colSpan="8" style={{ textAlign: "center" }}>
                 No Data Available to show
               </td>
             </tr>
@@ -182,7 +219,7 @@ const Users = () => {
         </tbody>
       </table>
       <Pagination
-        current={currentPage} // current selected page
+        current={currentPage}
         pageSize={pageSize}
         total={totalUsers}
         onChange={handlePageChange}

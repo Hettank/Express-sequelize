@@ -3,14 +3,14 @@ import userServices from "../service/user.service.js";
 const userController = {
     getUsers: async (req, res) => {
         try {
-            let { search, page, limit, active, inactive } = req.query;
+            let { search, page, limit, active, inactive, order = 'DESC' } = req.query;
 
             page = parseInt(page) || 1;
             limit = parseInt(limit) || 10;
 
             search = search || "";
 
-            const users = await userServices.getUsers(search, page, limit, active, inactive);
+            const users = await userServices.getUsers(search, page, limit, active, inactive, order);
 
             res.status(200).json(users);
         } catch (error) {
